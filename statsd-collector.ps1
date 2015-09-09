@@ -22,7 +22,7 @@ Get-WmiObject Win32_LogicalDisk -ComputerName localhost | ForEach-Object {
 
 		./send-statsd -data "$namespace.disk.$deviceid.freespace:$freespace|g" -ip $server -port $port
 		./send-statsd -data "$namespace.disk.$deviceid.size:$size|g" -ip $server -port $port
-		./send-statsd -data "$namespace.$deviceid.percent-free:$percent|g" -ip $server -port $port
+		./send-statsd -data "$namespace.disk.$deviceid.percent-free:$percent|g" -ip $server -port $port
 	}
 }
 
