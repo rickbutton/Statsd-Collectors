@@ -1,0 +1,6 @@
+<Settings>
+	<StatsdServer>127.0.0.1</StatsdServer>
+	<StatsdPort>8125</StatsdPort>
+	<Customer>company-name</Customer>
+	<Drives>c</Drives>
+</Settings>
