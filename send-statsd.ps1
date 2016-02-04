@@ -57,7 +57,7 @@ $ipAddress=[System.Net.IPAddress]::Parse($ip)
 #Create endpoint and udp client
 $endPoint=New-Object System.Net.IPEndPoint($ipAddress, $port)
 $udpclient=New-Object System.Net.Sockets.UdpClient
-
+Write-Host $data
 #Encode and send the data
 $encodedData=[System.Text.Encoding]::ASCII.GetBytes($data)
 $bytesSent=$udpclient.Send($encodedData,$encodedData.length,$endPoint)

@@ -5,11 +5,11 @@ $myDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 $server = $ConfigFile.Settings.StatsdServer
 $port = $ConfigFile.Settings.StatsdPort
-$customer = $ConfigFile.Settings.Customer
+$ns = $ConfigFile.Settings.Namespace
 $drives = $ConfigFile.Settings.Drives
 
 $computername = (hostname).ToLower()
-$namespace = "{0}.{1}" -f $customer, $computername
+$namespace = "{0}.{1}" -f $ns, $computername
 
 
 # Get Disk Space Info
@@ -35,3 +35,9 @@ $FreeMem = ([math]::round($OperatingSystem.FreePhysicalMemory / 1024, 2))
 
 ./send-statsd -data "$namespace.memory.total:$TotalMem|g" -ip $server -port $port
 ./send-statsd -data "$namespace.memory.free:$FreeMem|g" -ip $server -port $port
+
+# Get CPU Info
+
+$cpu = Get-WmiObject win32_processor
+$usage = $cpu.LoadPercentage
+./send-statsd -data "$namespace.cpu.usage:$usage|g" -ip $server -port $port
